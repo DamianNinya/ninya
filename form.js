@@ -15,13 +15,29 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// Wait for the DOM to load before interacting with it
+// Add this function to ensure the value is between 0 and 999
+function validateNumberInput(inputElement) {
+    let value = parseInt(inputElement.value, 10);
+
+    if (value < 0 || isNaN(value)) {
+        inputElement.value = 0;
+    } else if (value > 999) {
+        inputElement.value = 999;
+    }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     const submitButton = document.getElementById("submitAAR");
     if (!submitButton) {
         console.error("Error: 'submitAAR' element not found.");
         return;
     }
+
+    // Add input validation for the number inputs
+    const numberInputs = document.querySelectorAll('input[type="number"]');
+    numberInputs.forEach(input => {
+        input.addEventListener('input', () => validateNumberInput(input));
+    });
 
     submitButton.addEventListener("click", async (e) => {
         e.preventDefault();
@@ -38,6 +54,11 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("Please fill out all required fields.");
             return;
         }
+
+        // Validate number inputs before submission
+        validateNumberInput(document.getElementById("enemy_kills"));
+        validateNumberInput(document.getElementById("technicals"));
+        validateNumberInput(document.getElementById("hvts_killed"));
 
         try {
             await addDoc(collection(db, "AARs"), {
@@ -56,12 +77,6 @@ document.addEventListener("DOMContentLoaded", () => {
         } catch (error) {
             console.error("Error adding AAR:", error);
             alert("Failed to submit AAR.");
-        } 
+        }
     });
 });
-
-function validateNumberInput(input) {
-    if (input.value.length > 3) {
-        input.value = input.value.slice(0, 3);
-    }
-}
