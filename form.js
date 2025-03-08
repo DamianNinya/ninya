@@ -1,19 +1,64 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js";
+// Replace Firebase configuration and Firestore imports with GitHub API integration
+const GITHUB_API_URL = "https://api.github.com";
+const REPO = "DamianNinya/ninya";
+const FILE_PATH = "aar_data.json";
+const BRANCH = "main"; // Change if using another branch
 
-// Firebase configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyBaMD90W7Itw3suZEypxyOGTEYo5kr4_mE",
-    authDomain: "black-viper-b4ab5.firebaseapp.com",
-    projectId: "black-viper-b4ab5",
-    storageBucket: "black-viper-b4ab5.firebasestorage.app",
-    messagingSenderId: "118509311014",
-    appId: "1:118509311014:web:0d77172cafb407b47bc2e7"
-};
+const GITHUB_TOKEN = "your-github-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-here";  // Place your token here
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+// Utility function to update the JSON file on GitHub
+async function updateAARData(newData) {
+    try {
+        // Step 1: Fetch the existing JSON file from GitHub
+        const response = await fetch(`${GITHUB_API_URL}/repos/${REPO}/contents/${FILE_PATH}?ref=${BRANCH}`, {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${GITHUB_TOKEN}`,
+                "Accept": "application/vnd.github.v3+json",
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Failed to fetch file: ${response.statusText}`);
+        }
+
+        const fileData = await response.json();
+        const sha = fileData.sha; // We need the sha to update the file
+
+        // Step 2: Prepare the data to be updated
+        const updatedData = {
+            ...newData,
+        };
+
+        // Step 3: Commit the changes back to GitHub
+        const commitResponse = await fetch(`${GITHUB_API_URL}/repos/${REPO}/contents/${FILE_PATH}`, {
+            method: "PUT",
+            headers: {
+                "Authorization": `Bearer ${GITHUB_TOKEN}`,
+                "Accept": "application/vnd.github.v3+json",
+            },
+            body: JSON.stringify({
+                message: "Update AAR data",
+                committer: {
+                    name: "Black-Viper Bot", // Adjust the name as needed
+                    email: "your-email@example.com" // Adjust the email as needed
+                },
+                content: btoa(JSON.stringify(updatedData)), // Convert the JSON data to base64
+                sha: sha, // Attach the sha of the existing file
+            })
+        });
+
+        if (!commitResponse.ok) {
+            throw new Error(`Failed to update file: ${commitResponse.statusText}`);
+        }
+
+        const commitData = await commitResponse.json();
+        alert("AAR submitted successfully!");
+    } catch (error) {
+        console.error("Error updating AAR data:", error);
+        alert("Failed to submit AAR.");
+    }
+}
 
 // Wait for the DOM to load before interacting with it
 document.addEventListener("DOMContentLoaded", () => {
@@ -39,23 +84,21 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        try {
-            await addDoc(collection(db, "AARs"), {
-                missionName,
-                author: teamLeader,
-                missionSteps: steps,
-                notes: casualties || "No additional notes",
-                enemyKills: enemyKills,
-                technicalsDestroyed: technicals,
-                hvtsKilled: hvtsKilled,
-                timestamp: new Date()
-            });
+        const newAARData = {
+            missionName,
+            author: teamLeader,
+            missionSteps: steps,
+            notes: casualties || "No additional notes",
+            enemyKills: enemyKills,
+            technicalsDestroyed: technicals,
+            hvtsKilled: hvtsKilled,
+            timestamp: new Date().toISOString(),
+        };
 
-            alert("AAR submitted successfully!");
-            document.getElementById("aar-form").reset();
-        } catch (error) {
-            console.error("Error adding AAR:", error);
-            alert("Failed to submit AAR.");
-        }
+        // Call the update function
+        await updateAARData(newAARData);
+
+        // Reset the form
+        document.getElementById("aar-form").reset();
     });
 });
