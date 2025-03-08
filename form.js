@@ -1,5 +1,5 @@
 // Utility function to fetch the GitHub token from environment variables (Example only; adjust as needed for your setup)
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN || "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";  // Make sure to set the token in environment variables
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN || "removed";  // Make sure to set the token in environment variables
 
 const GITHUB_API_URL = "https://api.github.com";
 const REPO = "DamianNinya/ninya";
