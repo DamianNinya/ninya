@@ -1,3 +1,4 @@
+<!-- form.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Submit AAR</title>
   <link rel="stylesheet" href="styles.css" />
-  <script defer src="form.js"></script>
 </head>
 <body>
   <header>
@@ -17,6 +17,7 @@
   </nav>
   <main>
     <form id="aar-form">
+      <!-- Your form fields remain unchanged -->
       <label for="mission_name">Mission Name:</label>
       <input type="text" id="mission_name" required />
 
@@ -41,5 +42,7 @@
       <button type="submit">Submit AAR</button>
     </form>
   </main>
+  <!-- Include the module script -->
+  <script type="module" src="form.js"></script>
 </body>
 </html>
