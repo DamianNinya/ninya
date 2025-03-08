@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit AAR</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="form.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Submit an After-Action Report</h1>
+    </header>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="aar_list.html">View AARs</a>
+    </nav>
+    <main>
+        <form id="aar-form">
+            <label for="mission_name">Mission Name:</label>
+            <input type="text" id="mission_name" required>
+
+            <label for="team_leader">Team Leader:</label>
+            <input type="text" id="team_leader" required>
+
+            <label for="enemy_kills">Enemy Kills:</label>
+            <input type="number" id="enemy_kills" required>
+
+            <label for="casualties">Casualties:</label>
+            <input type="text" id="casualties">
+
+            <label for="technicals">Technicals Destroyed:</label>
+            <input type="number" id="technicals" required>
+
+            <label for="hvts_killed">HVTs Killed:</label>
+            <input type="number" id="hvts_killed">
+
+            <label for="steps">Mission Steps (separate by "|"):</label>
+            <textarea id="steps" required></textarea>
+
+            <button type="submit">Submit AAR</button>
+        </form>
+    </main>
+</body>
+</html>
