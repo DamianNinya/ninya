@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Black Viper Communications</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      background-color: #121212;
+      color: #e0e0e0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    .tabs {
+      display: flex;
+      justify-content: space-around;
+      margin: 20px 0;
+      background-color: #1e1e1e;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+    .tab {
+      padding: 15px 20px;
+      color: #e0e0e0;
+      cursor: pointer;
+      text-align: center;
+      font-weight: bold;
+      background-color: #2c2c2c;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+    .tab:hover, .tab.active {
+      background-color: #64b5f6;
+      color: #121212;
+    }
+    .tab-content {
+      display: none;
+      padding: 20px;
+      background-color: #2c2c2c;
+      border-radius: 8px;
+      margin-top: 20px;
+      text-align: left;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      background-color: #2c2c2c;
+      color: #e0e0e0;
+    }
+    th, td {
+      padding: 10px;
+      text-align: center;
+      border: 1px solid #444;
+    }
+    th {
+      background-color: #333;
+    }
+    tbody tr:hover {
+      background-color: #444;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Black Viper Communications</h1>
+  </header>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="aar_list.html">View AARs</a>
+    <a href="form.html">Submit AAR</a>
+  </nav>
+
+  <div class="tabs">
+    <div class="tab" id="natoAlphabetTab">NATO Alphabet</div>
+    <div class="tab" id="radioPhrasesTab">Radio Phrases</div>
+    <div class="tab" id="tacticalCommandsTab">Tactical Commands</div>
+  </div>
+
+  <div class="tab-content" id="natoAlphabet">
+    <h2>NATO Phonetic Alphabet</h2>
+    <table>
+      <thead>
+        <tr><th>Letter</th><th>Code Word</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>A</td><td>Alpha</td></tr>
+        <tr><td>B</td><td>Bravo</td></tr>
+        <tr><td>C</td><td>Charlie</td></tr>
+        <tr><td>D</td><td>Delta</td></tr>
+        <tr><td>E</td><td>Echo</td></tr>
+        <tr><td>F</td><td>Foxtrot</td></tr>
+        <tr><td>G</td><td>Golf</td></tr>
+        <tr><td>H</td><td>Hotel</td></tr>
+        <tr><td>I</td><td>India</td></tr>
+        <tr><td>J</td><td>Juliett</td></tr>
+        <tr><td>K</td><td>Kilo</td></tr>
+        <tr><td>L</td><td>Lima</td></tr>
+        <tr><td>M</td><td>Mike</td></tr>
+        <tr><td>N</td><td>November</td></tr>
+        <tr><td>O</td><td>Oscar</td></tr>
+        <tr><td>P</td><td>Papa</td></tr>
+        <tr><td>Q</td><td>Quebec</td></tr>
+        <tr><td>R</td><td>Romeo</td></tr>
+        <tr><td>S</td><td>Sierra</td></tr>
+        <tr><td>T</td><td>Tango</td></tr>
+        <tr><td>U</td><td>Uniform</td></tr>
+        <tr><td>V</td><td>Victor</td></tr>
+        <tr><td>W</td><td>Whiskey</td></tr>
+        <tr><td>X</td><td>X-ray</td></tr>
+        <tr><td>Y</td><td>Yankee</td></tr>
+        <tr><td>Z</td><td>Zulu</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tab-content" id="radioPhrases">
+    <h2>Common Radio Phrases</h2>
+    <ul>
+      <li><strong>Roger:</strong> Message received and understood.</li>
+      <li><strong>Wilco:</strong> Will comply.</li>
+      <li><strong>Over:</strong> End of transmission, awaiting response.</li>
+      <li><strong>Out:</strong> End of transmission, no response needed.</li>
+      <li><strong>Break Break:</strong> Urgent interruption.</li>
+      <li><strong>Say Again:</strong> Repeat last transmission.</li>
+      <li><strong>How Copy?:</strong> Did you understand?</li>
+      <li><strong>Read You Loud and Clear:</strong> Strong and clear transmission.</li>
+    </ul>
+  </div>
+
+  <div class="tab-content" id="tacticalCommands">
+    <h2>Tactical Commands</h2>
+    <ul>
+      <li><strong>Hold:</strong> Stay in current position.</li>
+      <li><strong>Move:</strong> Advance to next point.</li>
+      <li><strong>Suppress:</strong> Provide covering fire.</li>
+      <li><strong>Flank Left/Right:</strong> Move to enemy's side.</li>
+      <li><strong>Fallback:</strong> Retreat to previous position.</li>
+      <li><strong>Check Your Six:</strong> Watch your back.</li>
+      <li><strong>Stack Up:</strong> Line up on a doorway for entry.</li>
+    </ul>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const tabs = document.querySelectorAll('.tab');
+      const tabContents = document.querySelectorAll('.tab-content');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => t.classList.remove('active'));
+          tabContents.forEach(content => content.classList.remove('active'));
+          tab.classList.add('active');
+          document.getElementById(tab.id.replace('Tab', '')).classList.add('active');
+        });
+      });
+      tabs[0].classList.add('active');
+      tabContents[0].classList.add('active');
+    });
+  </script>
+</body>
+</html>
