@@ -93,17 +93,24 @@ ul li {
 
 /* New AAR Entry Styles */
 .aar-entry {
-  margin-bottom: 20px;
-  padding: 15px;
+  margin-bottom: 20px;  /* Added margin to space out AAR entries */
+  padding: 20px;
   background-color: #2c2c2c;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border: 1px solid #444;  /* Border around each AAR entry */
+  transition: background-color 0.3s ease;
 }
 
+.aar-entry:hover {
+  background-color: #333333;  /* Slightly darker on hover for better interactivity */
+}
+
+/* Header for Each AAR */
 .aar-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   border-bottom: 2px solid #444;
   padding-bottom: 10px;
 }
@@ -118,18 +125,20 @@ ul li {
   color: #64b5f6;
 }
 
+/* Details section of the AAR */
 .aar-details {
-  margin-top: 15px;
+  margin-top: 20px;
 }
 
 .aar-detail {
-  margin-bottom: 10px;
+  margin-bottom: 15px; /* Added more space between individual details */
 }
 
 .aar-detail strong {
   color: #bb86fc;
 }
 
+/* Mission steps styled with bullets */
 .aar-detail ul {
   list-style-type: disc;
   padding-left: 20px;
@@ -137,4 +146,9 @@ ul li {
 
 .aar-detail ul li {
   margin-left: 10px;
+}
+
+/* Styling the individual AAR entries */
+.aar-entry + .aar-entry {
+  margin-top: 40px; /* Add space between consecutive AAR entries */
 }
