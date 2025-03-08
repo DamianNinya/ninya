@@ -1,5 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
 import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -14,15 +15,55 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const auth = getAuth(app);
 
 // Wait for the DOM to load before interacting with it
 document.addEventListener("DOMContentLoaded", () => {
     const submitButton = document.getElementById("submitAAR");
-    if (!submitButton) {
-        console.error("Error: 'submitAAR' element not found.");
+    const loginButton = document.getElementById("loginButton");
+    const loginEmail = document.getElementById("loginEmail");
+    const loginPassword = document.getElementById("loginPassword");
+    const aarForm = document.getElementById("aar-form");
+    const loginForm = document.getElementById("login-form");
+
+    if (!submitButton || !loginButton || !aarForm || !loginForm) {
+        console.error("Error: missing elements.");
         return;
     }
 
+    // Handle login
+    loginButton.addEventListener("click", async (e) => {
+        e.preventDefault();
+        const email = loginEmail.value.trim();
+        const password = loginPassword.value.trim();
+
+        if (email && password) {
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+                alert("Logged in successfully!");
+            } catch (error) {
+                console.error("Error logging in:", error);
+                alert("Failed to log in. Please check your credentials.");
+            }
+        } else {
+            alert("Please enter both email and password.");
+        }
+    });
+
+    // Check if the user is logged in
+    onAuthStateChanged(auth, user => {
+        if (user) {
+            // User is signed in, enable AAR form submission
+            aarForm.style.display = "block";  // Show form
+            loginForm.style.display = "none";  // Hide login form
+        } else {
+            // User is not signed in, show login
+            aarForm.style.display = "none";  // Hide form
+            loginForm.style.display = "block";  // Show login form
+        }
+    });
+
+    // Handle AAR form submission
     submitButton.addEventListener("click", async (e) => {
         e.preventDefault();
 
@@ -59,9 +100,3 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
-
-// Function to ensure the number input is limited to three digits
-function validateNumberInput(input) {
-    // If the input value has more than 3 digits, limit it
-    if (input.value.length > 3) {
-        input.value = 
