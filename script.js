@@ -1,6 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js";
-import Chart from "https://cdn.jsdelivr.net/npm/chart.js";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -64,64 +63,14 @@ document.addEventListener("DOMContentLoaded", () => {
   tabs[0].classList.add('active');
   tabContents[0].classList.add('active');
   
-  // Function to initialize chart
-  const initChart = () => {
-    const ctx = document.getElementById('chart');
-    return new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['Enemy Kills', 'HVTs Killed', 'Technicals Destroyed'],
-        datasets: [{
-          label: 'AAR Stats',
-          data: [15, 5, 3], // Replace with dynamic data
-          backgroundColor: ['#64b5f6', '#bb86fc', '#03dac5'],
-          borderColor: ['#1976d2', '#6200ea', '#018786'],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: 'top',
-          },
-          tooltip: {
-            callbacks: {
-              label: function (tooltipItem) {
-                return `${tooltipItem.dataset.label}: ${tooltipItem.raw}`;
-              }
-            }
-          }
-        },
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }
-    });
-  };
-
-  // Add event listener to each tab
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
-      // Remove 'active' class from all tabs and content
       tabs.forEach(t => t.classList.remove('active'));
       tabContents.forEach(content => content.classList.remove('active'));
 
-      // Add 'active' class to clicked tab and its corresponding content
       tab.classList.add('active');
       const targetContent = document.getElementById(tab.id.replace('Tab', ''));
       targetContent.classList.add('active');
-
-      // Reinitialize the chart for the PMC Member List tab if it's active
-      if (tab.id === 'pmcTab' && document.getElementById('pmcMemberList').classList.contains('active')) {
-        // Check if the chart exists and destroy it to avoid duplicates
-        if (window.myChart) {
-          window.myChart.destroy();
-        }
-        window.myChart = initChart(); // Initialize the chart
-      }
     });
   });
 });
