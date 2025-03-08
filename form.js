@@ -15,6 +15,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+// Wait for the DOM to load before interacting with it
 document.addEventListener("DOMContentLoaded", () => {
     const submitButton = document.getElementById("submitAAR");
     if (!submitButton) {
@@ -22,52 +23,18 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    // List of number fields to enforce limits
-    const numberFields = ["enemy_kills", "technicals", "hvts_killed"];
-
-    numberFields.forEach((id) => {
-        let input = document.getElementById(id);
-
-        // Prevent typing more than 3 digits
-        input.addEventListener("input", function () {
-            if (this.value.length > 3) {
-                this.value = this.value.slice(0, 3);
-            }
-        });
-
-        // Prevent pasting large numbers
-        input.addEventListener("paste", function (event) {
-            event.preventDefault();
-            let pasteData = (event.clipboardData || window.clipboardData).getData("text");
-            if (!isNaN(pasteData)) {
-                this.value = pasteData.slice(0, 3); // Only allow first 3 digits
-            }
-        });
-    });
-
     submitButton.addEventListener("click", async (e) => {
         e.preventDefault();
 
         const missionName = document.getElementById("mission_name").value.trim();
         const teamLeader = document.getElementById("team_leader").value.trim();
-        let enemyKills = document.getElementById("enemy_kills").value.trim();
+        const enemyKills = document.getElementById("enemy_kills").value.trim();
         const casualties = document.getElementById("casualties").value.trim();
-        let technicals = document.getElementById("technicals").value.trim();
-        let hvtsKilled = document.getElementById("hvts_killed").value.trim();
+        const technicals = document.getElementById("technicals").value.trim();
+        const hvtsKilled = document.getElementById("hvts_killed").value.trim();
         const steps = document.getElementById("steps").value.trim().split("|").map(step => step.trim()).filter(step => step);
 
-        // Convert number values to integers, default to 0 if empty
-        enemyKills = parseInt(enemyKills, 10) || 0;
-        technicals = parseInt(technicals, 10) || 0;
-        hvtsKilled = parseInt(hvtsKilled, 10) || 0;
-
-        // Prevent numbers above 999
-        if (enemyKills > 999 || technicals > 999 || hvtsKilled > 999) {
-            alert("Numbers must be between 0 and 999.");
-            return;
-        }
-
-        if (!missionName || !teamLeader || !steps.length) {
+        if (!missionName || !teamLeader || !enemyKills || !technicals || !steps.length) {
             alert("Please fill out all required fields.");
             return;
         }
@@ -92,3 +59,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+// Function to ensure the number input is limited to three digits
+function validateNumberInput(input) {
+    // If the input value has more than 3 digits, limit it
+    if (input.value.length > 3) {
+        input.value = 
