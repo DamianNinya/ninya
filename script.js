@@ -32,12 +32,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 const aar = doc.data();
                 const listItem = document.createElement("div");
                 listItem.classList.add("aar-entry");
+
+                // Create the HTML for displaying the AAR's info
                 listItem.innerHTML = `
                     <h3>${aar.missionName} <span>by ${aar.author}</span></h3>
                     <ul>
-                        ${aar.missionSteps.map(step => `<li>${step}</li>`).join("")}
+                        <li><strong>Enemy Kills:</strong> ${aar.enemyKills}</li>
+                        <li><strong>HVTs Killed:</strong> ${aar.hvtsKilled}</li>
+                        <li><strong>Technicals Destroyed:</strong> ${aar.technicalsDestroyed}</li>
+                        <li><strong>Mission Steps:</strong> <ul>
+                            ${aar.missionSteps.map(step => `<li>${step}</li>`).join("")}
+                        </ul></li>
+                        <li><strong>Notes:</strong> ${aar.notes || "No additional notes"}</li>
                     </ul>
-                    <p><strong>Notes:</strong> ${aar.notes || "No additional notes"}</p>
                 `;
                 aarList.appendChild(listItem);
             });
