@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } catch (error) {
             console.error("Error adding AAR:", error);
             alert("Failed to submit AAR.");
-        }
+        } 
     });
 });
 
