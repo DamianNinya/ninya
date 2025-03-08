@@ -180,7 +180,124 @@
       </tbody>
     </table>
   </section>
-
+  <section>
+    <h2>NATO Phonetic Alphabet in Communication</h2>
+    <p>The <strong>NATO Phonetic Alphabet</strong> is widely used in radio communications to ensure clear and unambiguous messaging, especially in high-stress or noisy environments. One of its common applications is <strong>numerical communication</strong>, where letters from the phonetic alphabet are used to replace numbers or designate locations.</p>
+  
+    <hr>
+  
+    <h3>Numerical Communication Example</h3>
+    <p>In some mission protocols, pre-assigned locations or objectives may be designated using <strong>Alfa, Bravo, Charlie</strong> instead of numbers. This minimizes confusion when transmitting critical information.</p>
+    <p>For example:</p>
+    <ul>
+      <li><strong>Site 1</strong> → <strong>Alfa</strong></li>
+      <li><strong>Site 2</strong> → <strong>Bravo</strong></li>
+      <li><strong>Site 3</strong> → <strong>Charlie</strong></li>
+    </ul>
+    <p>However, <strong>Zero</strong> is always transmitted as "Zero" to avoid confusion with the letter "O."</p>
+  
+    <hr>
+  
+    <h3>Example Comms Transmission</h3>
+    <p><strong>Scenario:</strong> Team has two exfiltration sites — Site 1 (<strong>Alfa</strong>) and Site 2 (<strong>Bravo</strong>).</p>
+    <p><strong>Transmission Example:</strong><br>
+      01 Actual, this is Hitman 1, Moving to Alfa, over.<br>
+      Hitman 1, this is 01 Actual, say again, over.<br>
+      01 Actual, I say again, Moving to Alfa, over.<br>
+      Roger, Hitman 1. Moving to Alfa, out.
+    </p>
+  
+    <hr>
+  
+    <h3>Location-Based Designations</h3>
+    <p>In some missions, <strong>Alfa, Bravo, Charlie</strong> may be used to designate key terrain, objectives, or rally points instead of numerical signs. This method helps maintain <strong>OPSEC (Operational Security)</strong> and prevents adversaries from easily identifying locations.</p>
+    <p><strong>Example Designations:</strong></p>
+    <ul>
+      <li><strong>Alfa</strong> → Primary Exfiltration Point</li>
+      <li><strong>Bravo</strong> → Secondary Rally Point</li>
+      <li><strong>Charlie</strong> → Supply Cache</li>
+    </ul>
+  
+    <hr>
+  
+    <h3>Military Comms Jargon & Phrases</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Term</th>
+          <th>Meaning</th>
+          <th>Example Usage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Actual</strong></td><td>Unit Leader Call Sign</td><td>"Hitman 1, this is 01 Actual, request Sitrep, over."</td></tr>
+        <tr><td><strong>Sitrep</strong></td><td>Situation Report</td><td>"01 Actual, this is Hitman 2, Sitrep as follows, holding at Bravo, over."</td></tr>
+        <tr><td><strong>Break</strong></td><td>Pause between messages</td><td>"Contact front, break... Moving to Bravo, over."</td></tr>
+        <tr><td><strong>Oscar Mike</strong></td><td>On the Move</td><td>"01 Actual, this is Hitman 1, Oscar Mike to Alfa, over."</td></tr>
+        <tr><td><strong>Solid Copy</strong></td><td>Message received & understood</td><td>"Solid Copy, out."</td></tr>
+        <tr><td><strong>Standby</strong></td><td>Wait for further instruction</td><td>"Hitman 2, Standby, over."</td></tr>
+        <tr><td><strong>Danger Close</strong></td><td>Friendly forces near target</td><td>"01 Actual, this is Hitman 1, requesting fire mission... Danger Close, over."</td></tr>
+        <tr><td><strong>Wilco</strong></td><td>Will Comply</td><td>"Roger, Wilco. Moving to Alfa, out."</td></tr>
+        <tr><td><strong>Jackpot</strong></td><td>Target Secured</td><td>"Hitman 1, this is 01 Actual, Jackpot. Package secured, over."</td></tr>
+      </tbody>
+    </table>
+  
+    <hr>
+  
+    <h3>Comms Flow Structure</h3>
+    <p>A standard comms message follows this pattern:</p>
+    <p><strong>[Receiver], this is [Sender], [Message], Over.</strong></p>
+    <p><strong>✅ Example:</strong><br>Hitman 1, this is Hitman 2, Eyes on target, Bravo point secured, over.</p>
+  
+    <hr>
+  
+    <h3>Radio Bearings & Distance Explanation</h3>
+    <p>Bearings are used to give precise enemy or point of interest locations by referencing the <strong>compass heading</strong> from your own position.</p>
+    <p>Bearings are always given in <strong>three-digit format</strong> to avoid confusion.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Bearing</th>
+          <th>Meaning</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>0-9-0</strong></td><td>East (090°)</td></tr>
+        <tr><td><strong>1-8-0</strong></td><td>South (180°)</td></tr>
+        <tr><td><strong>2-7-0</strong></td><td>West (270°)</td></tr>
+        <tr><td><strong>3-6-0</strong></td><td>North (360° or 0°)</td></tr>
+        <tr><td><strong>2-4-0</strong></td><td>Southwest (240°)</td></tr>
+      </tbody>
+    </table>
+  
+    <hr>
+  
+    <h3>Contact Report Example</h3>
+    <p><strong>Scenario:</strong> Team is moving to exfil but spots enemy activity.</p>
+    <p><strong>Transmission Example:</strong><br>
+      01 Actual, this is Hitman 1, Contact front, two times foot mobiles, break...<br>
+      Bearing 2-4-0, Danger Close, over.<br>
+      Hitman 1, this is 01 Actual, Solid Copy... break...<br>
+      Hitman 3, shift fire to Bravo, over.
+    </p>
+  
+    <hr>
+  
+    <h3>Final Notes</h3>
+    <ul>
+      <li>Always call <strong>the receiver first</strong></li>
+      <li>Use <strong>"Say Again"</strong> instead of <strong>"Repeat"</strong></li>
+      <li>Pause messages with <strong>Break</strong></li>
+      <li>Confirm orders with <strong>Roger</strong> or <strong>Wilco</strong></li>
+      <li>If you don't hear <strong>"Over"</strong>, don't reply</li>
+      <li>If you hear <strong>"Out"</strong>, the conversation is <strong>done</strong></li>
+      <li>ALWAYS REFER TO Team Leaders as "Actual" after their call sign</li>
+    </ul>
+  
+    <hr>
+  
+    <p><strong>Slow is Smooth, Smooth is Fast.</strong></p>
+  </section>  
   <footer>
     <p>Information compiled by Black Viper Communications | 2025</p>
   </footer>
