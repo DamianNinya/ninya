@@ -10,9 +10,12 @@
       background-color: #121212;
       color: #e0e0e0;
       font-family: Arial, sans-serif;
-      text-align: center;
+      line-height: 1.6;
+      margin: 0;
+      padding: 20px;
     }
     header {
+      text-align: center;
       padding: 20px;
     }
     h1 {
@@ -21,20 +24,26 @@
     }
     h2 {
       margin-top: 40px;
+      text-align: left;
+    }
+    section {
+      max-width: 900px;
+      margin: 0 auto;
     }
     table, ul {
       margin-top: 20px;
-      width: 80%;
-      margin-left: auto;
-      margin-right: auto;
+      width: 100%;
       background-color: #2c2c2c;
       color: #e0e0e0;
       border-radius: 8px;
       padding: 10px;
+      text-align: left;
+      margin-left: auto;
+      margin-right: auto;
     }
     th, td {
       padding: 10px;
-      text-align: center;
+      text-align: left;
       border: 1px solid #444;
     }
     th {
@@ -44,7 +53,8 @@
       background-color: #444;
     }
     ul {
-      list-style-type: none;
+      list-style-type: disc;
+      margin-left: 20px;
       padding: 0;
     }
     li {
@@ -58,13 +68,64 @@
       margin-top: 40px;
       font-size: 0.8em;
       color: #aaa;
+      text-align: center;
+    }
+    pre {
+      background-color: #333;
+      color: #e0e0e0;
+      padding: 10px;
+      border-radius: 5px;
+      font-family: Consolas, "Courier New", monospace;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    hr {
+      border: 1px solid #444;
+      margin: 20px 0;
+    }
+
+    /* Navigation bar styles */
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: #1e1e1e;
+      padding: 10px 0;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+
+    nav a {
+      color: #e0e0e0;
+      text-decoration: none;
+      padding: 12px 20px;
+      font-weight: bold;
+      background-color: #2c2c2c;
+      border-radius: 8px;
+      margin: 0 10px;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    nav a:hover {
+      background-color: #64b5f6;
+      color: #121212;
+      transform: scale(1.05);
+    }
+
+    nav a:active {
+      background-color: #1976d2;
+      transform: scale(1);
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Black Viper Communications</h1>
+    <h1>Welcome to Black Viper Communications</h1>
   </header>
+  <nav>
+    <a href="aar_list.html">View AARs</a>
+    <a href="form.html">Submit AAR</a>
+    <a href="Comms.html">Comms</a>
+  </nav>
 
   <section>
     <h2>NATO Verbal Radio Communication Guide</h2>
@@ -200,12 +261,13 @@
   
     <h3>Example Comms Transmission</h3>
     <p><strong>Scenario:</strong> Team has two exfiltration sites — Site 1 (<strong>Alfa</strong>) and Site 2 (<strong>Bravo</strong>).</p>
-    <p><strong>Transmission Example:</strong><br>
-      01 Actual, this is Hitman 1, Moving to Alfa, over.<br>
-      Hitman 1, this is 01 Actual, say again, over.<br>
-      01 Actual, I say again, Moving to Alfa, over.<br>
-      Roger, Hitman 1. Moving to Alfa, out.
-    </p>
+    <p><strong>Transmission Example:</strong></p>
+    <pre>
+  01 Actual, this is Hitman 1, Moving to Alfa, over.
+  Hitman 1, this is 01 Actual, say again, over.
+  01 Actual, I say again, Moving to Alfa, over.
+  Roger, Hitman 1. Moving to Alfa, out.
+    </pre>
   
     <hr>
   
@@ -297,7 +359,7 @@
     <hr>
   
     <p><strong>Slow is Smooth, Smooth is Fast.</strong></p>
-  </section>  
+  </section>
   <footer>
     <p>Information compiled by Black Viper Communications | 2025</p>
   </footer>
