@@ -1,10 +1,10 @@
-// Replace Firebase configuration and Firestore imports with GitHub API integration
+// Utility function to fetch the GitHub token from environment variables (Example only; adjust as needed for your setup)
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN || "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";  // Make sure to set the token in environment variables
+
 const GITHUB_API_URL = "https://api.github.com";
 const REPO = "DamianNinya/ninya";
 const FILE_PATH = "aar_data.json";
 const BRANCH = "main"; // Change if using another branch
-
-const GITHUB_TOKEN = "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";  // Place your token here
 
 // Utility function to update the JSON file on GitHub
 async function updateAARData(newData) {
@@ -18,8 +18,10 @@ async function updateAARData(newData) {
             }
         });
 
+        // Check if the response is not OK (failed to fetch)
         if (!response.ok) {
-            throw new Error(`Failed to fetch file: ${response.statusText}`);
+            const errorData = await response.json();
+            throw new Error(`Failed to fetch file: ${response.statusText}. ${errorData.message}`);
         }
 
         const fileData = await response.json();
@@ -48,11 +50,14 @@ async function updateAARData(newData) {
             })
         });
 
+        // Check if commit response is not OK (failed to update)
         if (!commitResponse.ok) {
-            throw new Error(`Failed to update file: ${commitResponse.statusText}`);
+            const commitErrorData = await commitResponse.json();
+            throw new Error(`Failed to update file: ${commitResponse.statusText}. ${commitErrorData.message}`);
         }
 
         const commitData = await commitResponse.json();
+        console.log("AAR data committed successfully:", commitData);
         alert("AAR submitted successfully!");
     } catch (error) {
         console.error("Error updating AAR data:", error);
