@@ -274,13 +274,23 @@
 
   <script>
     // Switch tabs functionality
-    document.querySelectorAll('.tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+    document.addEventListener("DOMContentLoaded", () => {
+      const tabs = document.querySelectorAll('.tab');
+      const tabContents = document.querySelectorAll('.tab-content');
 
-        tab.classList.add('active');
-        document.getElementById(tab.id.replace('Tab', '')).classList.add('active');
+      // Set the first tab as active by default
+      tabs[0].classList.add('active');
+      tabContents[0].classList.add('active');
+      
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => t.classList.remove('active'));
+          tabContents.forEach(content => content.classList.remove('active'));
+
+          tab.classList.add('active');
+          const targetContent = document.getElementById(tab.id.replace('Tab', ''));
+          targetContent.classList.add('active');
+        });
       });
     });
   </script>
