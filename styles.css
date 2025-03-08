@@ -5,8 +5,8 @@ body, html {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #121212;
   color: #e0e0e0;
-  overflow-x: hidden;
-  text-align: left;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  text-align: left; /* Ensure all text is left-aligned by default */
 }
 
 /* Containers */
@@ -24,7 +24,7 @@ header, nav, main {
 header h1 {
   margin: 0;
   font-size: 2em;
-  text-align: center;
+  text-align: center; /* Center only the title header */
 }
 
 /* Navigation */
@@ -96,17 +96,17 @@ ul li {
 
 /* New AAR Entry Styles */
 .aar-entry {
-  margin-bottom: 20px;
+  margin-bottom: 20px;  
   padding: 20px;
   background-color: #2c2c2c;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  border: 1px solid #444;
+  border: 1px solid #444;  
   transition: background-color 0.3s ease;
 }
 
 .aar-entry:hover {
-  background-color: #333333;
+  background-color: #333333;  
 }
 
 /* Header for Each AAR */
@@ -134,7 +134,7 @@ ul li {
 }
 
 .aar-detail {
-  margin-bottom: 15px;
+  margin-bottom: 15px; 
 }
 
 .aar-detail strong {
@@ -153,19 +153,19 @@ ul li {
 
 /* Styling the individual AAR entries */
 .aar-entry + .aar-entry {
-  margin-top: 40px;
+  margin-top: 40px; 
 }
 
 /* Responsive Styles */
 @media (max-width: 768px) {
   header, nav, main {
-    max-width: 100%;
+    max-width: 100%; 
     margin: 10px;
     padding: 15px;
   }
 
   form {
-    max-width: 100%;
+    max-width: 100%; 
     margin: 0 10px;
   }
 
@@ -178,11 +178,11 @@ ul li {
   }
 
   .aar-detail ul {
-    padding-left: 10px;
+    padding-left: 10px; 
   }
 
   .aar-detail ul li {
-    margin-left: 5px;
+    margin-left: 5px; 
   }
 
   .aar-entry {
@@ -199,7 +199,7 @@ ul li {
 /* Further responsiveness for very small screens */
 @media (max-width: 480px) {
   header h1 {
-    font-size: 1.5em;
+    font-size: 1.5em; 
   }
 
   .aar-header h3 {

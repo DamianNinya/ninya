@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
 import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js";
-import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -20,13 +20,13 @@ const auth = getAuth(app);
 // Wait for the DOM to load before interacting with it
 document.addEventListener("DOMContentLoaded", () => {
     const submitButton = document.getElementById("submitAAR");
-    const aarForm = document.getElementById("aar-form");
-    const loginForm = document.getElementById("login-form");
     const loginButton = document.getElementById("loginButton");
     const loginEmail = document.getElementById("loginEmail");
     const loginPassword = document.getElementById("loginPassword");
+    const aarForm = document.getElementById("aar-form");
+    const loginForm = document.getElementById("login-form");
 
-    if (!submitButton || !loginButton || !aarForm) {
+    if (!submitButton || !loginButton || !aarForm || !loginForm) {
         console.error("Error: missing elements.");
         return;
     }
@@ -34,75 +34,69 @@ document.addEventListener("DOMContentLoaded", () => {
     // Check if the user is logged in
     onAuthStateChanged(auth, user => {
         if (user) {
-            // User is signed in, enable AAR form submission
+            // User is signed in, show the AAR form
             aarForm.style.display = "block";  // Show form
-            loginForm.style.display = "none";  // Hide login form
+            loginForm.style.display = "none";  // Hide login
         } else {
-            // User is signed out, show login form
-            aarForm.style.display = "none";
-            loginForm.style.display = "block";
+            // User is not signed in, show the login form
+            aarForm.style.display = "none";  // Hide form
+            loginForm.style.display = "block";  // Show login form
         }
     });
 
-    // Submit AAR form
-    submitButton.addEventListener("click", (event) => {
-        event.preventDefault(); // Prevent the default form submission behavior
+    // Handle login
+    loginButton.addEventListener("click", async (e) => {
+        e.preventDefault();
+        const email = loginEmail.value.trim();
+        const password = loginPassword.value.trim();
 
-        // Get input values
-        const missionName = document.getElementById("mission_name").value;
-        const teamLeader = document.getElementById("team_leader").value;
-        const casualties = document.getElementById("casualties").value;
-        const enemyKills = document.getElementById("enemy_kills").value;
-        const technicals = document.getElementById("technicals").value;
-        const hvtsKilled = document.getElementById("hvts_killed").value;
-        const steps = document.getElementById("steps").value;
-
-        // Save the AAR data
-        addDoc(collection(db, "AARs"), {
-            mission_name: missionName,
-            team_leader: teamLeader,
-            casualties: casualties,
-            enemy_kills: enemyKills,
-            technicals: technicals,
-            hvts_killed: hvtsKilled,
-            steps: steps,
-            timestamp: new Date()
-        }).then(() => {
-            alert("AAR submitted successfully!");
-            aarForm.reset(); // Reset the form after submission
-        }).catch(error => {
-            console.error("Error adding document: ", error);
-        });
+        if (email && password) {
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+                alert("Logged in successfully!");
+            } catch (error) {
+                console.error("Error logging in:", error);
+                alert("Failed to log in. Please check your credentials.");
+            }
+        } else {
+            alert("Please enter both email and password.");
+        }
     });
 
-    // Handle login
-    loginButton.addEventListener("click", (event) => {
-        event.preventDefault();
-        const email = loginEmail.value;
-        const password = loginPassword.value;
+    // Handle AAR form submission (only allowed if logged in)
+    submitButton.addEventListener("click", async (e) => {
+        e.preventDefault();
 
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed in successfully
-                const user = userCredential.user;
-                alert("Login successful!");
-                loginForm.style.display = "none";  // Hide login form
-                aarForm.style.display = "block";  // Show AAR form
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                alert("Error: " + errorMessage);
+        const missionName = document.getElementById("mission_name").value.trim();
+        const teamLeader = document.getElementById("team_leader").value.trim();
+        const enemyKills = document.getElementById("enemy_kills").value.trim();
+        const casualties = document.getElementById("casualties").value.trim();
+        const technicals = document.getElementById("technicals").value.trim();
+        const hvtsKilled = document.getElementById("hvts_killed").value.trim();
+        const steps = document.getElementById("steps").value.trim().split("|").map(step => step.trim()).filter(step => step);
+
+        if (!missionName || !teamLeader || !enemyKills || !technicals || !steps.length) {
+            alert("Please fill out all required fields.");
+            return;
+        }
+
+        try {
+            await addDoc(collection(db, "AARs"), {
+                missionName,
+                author: teamLeader,
+                missionSteps: steps,
+                notes: casualties || "No additional notes",
+                enemyKills: enemyKills,
+                technicalsDestroyed: technicals,
+                hvtsKilled: hvtsKilled,
+                timestamp: new Date()
             });
+
+            alert("AAR submitted successfully!");
+            document.getElementById("aar-form").reset();
+        } catch (error) {
+            console.error("Error adding AAR:", error);
+            alert("Failed to submit AAR.");
+        }
     });
 });
-
-// Function to validate number inputs
-function validateNumberInput(input) {
-    const value = input.value;
-    if (value < 0) {
-        input.value = 0;
-    } else if (value > 999) {
-        input.value = 999;
-    }
-}
