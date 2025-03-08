@@ -14,30 +14,37 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-const aarList = document.getElementById("aarList");
 
-async function loadAARs() {
-    try {
-        const querySnapshot = await getDocs(collection(db, "AARs"));
-        aarList.innerHTML = ""; // Clear existing content
-
-        querySnapshot.forEach((doc) => {
-            const aar = doc.data();
-            const listItem = document.createElement("div");
-            listItem.classList.add("aar-entry");
-            listItem.innerHTML = `
-                <h3>${aar.missionName} <span>by ${aar.author}</span></h3>
-                <ul>
-                    ${aar.missionSteps.map(step => `<li>${step}</li>`).join("")}
-                </ul>
-                <p><strong>Notes:</strong> ${aar.notes || "No additional notes"}</p>
-            `;
-            aarList.appendChild(listItem);
-        });
-    } catch (error) {
-        console.error("Error loading AARs:", error);
+// Wait for the DOM to load before interacting with it
+document.addEventListener("DOMContentLoaded", () => {
+    const aarList = document.getElementById("aar-list");
+    if (!aarList) {
+        console.error("Error: 'aar-list' element not found.");
+        return;
     }
-}
 
-// Load AARs when the page loads
-document.addEventListener("DOMContentLoaded", loadAARs);
+    async function loadAARs() {
+        try {
+            const querySnapshot = await getDocs(collection(db, "AARs"));
+            aarList.innerHTML = ""; // Clear existing content
+
+            querySnapshot.forEach((doc) => {
+                const aar = doc.data();
+                const listItem = document.createElement("div");
+                listItem.classList.add("aar-entry");
+                listItem.innerHTML = `
+                    <h3>${aar.missionName} <span>by ${aar.author}</span></h3>
+                    <ul>
+                        ${aar.missionSteps.map(step => `<li>${step}</li>`).join("")}
+                    </ul>
+                    <p><strong>Notes:</strong> ${aar.notes || "No additional notes"}</p>
+                `;
+                aarList.appendChild(listItem);
+            });
+        } catch (error) {
+            console.error("Error loading AARs:", error);
+        }
+    }
+
+    loadAARs();
+});

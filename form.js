@@ -15,33 +15,47 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// Form submission handler
-document.getElementById("submitAAR").addEventListener("click", async (e) => {
-    e.preventDefault();
-
-    const missionName = document.getElementById("missionName").value.trim();
-    const author = document.getElementById("author").value.trim();
-    const missionSteps = document.getElementById("missionSteps").value.split("\n").map(step => step.trim()).filter(step => step);
-    const notes = document.getElementById("notes").value.trim();
-
-    if (!missionName || !author || missionSteps.length === 0) {
-        alert("Please fill out all required fields.");
+// Wait for the DOM to load before interacting with it
+document.addEventListener("DOMContentLoaded", () => {
+    const submitButton = document.getElementById("submitAAR");
+    if (!submitButton) {
+        console.error("Error: 'submitAAR' element not found.");
         return;
     }
 
-    try {
-        await addDoc(collection(db, "AARs"), {
-            missionName,
-            author,
-            missionSteps,
-            notes,
-            timestamp: new Date()
-        });
+    submitButton.addEventListener("click", async (e) => {
+        e.preventDefault();
 
-        alert("AAR submitted successfully!");
-        document.getElementById("AARForm").reset();
-    } catch (error) {
-        console.error("Error adding AAR:", error);
-        alert("Failed to submit AAR.");
-    }
+        const missionName = document.getElementById("mission_name").value.trim();
+        const teamLeader = document.getElementById("team_leader").value.trim();
+        const enemyKills = document.getElementById("enemy_kills").value.trim();
+        const casualties = document.getElementById("casualties").value.trim();
+        const technicals = document.getElementById("technicals").value.trim();
+        const hvtsKilled = document.getElementById("hvts_killed").value.trim();
+        const steps = document.getElementById("steps").value.trim().split("|").map(step => step.trim()).filter(step => step);
+
+        if (!missionName || !teamLeader || !enemyKills || !technicals || !steps.length) {
+            alert("Please fill out all required fields.");
+            return;
+        }
+
+        try {
+            await addDoc(collection(db, "AARs"), {
+                missionName,
+                author: teamLeader,
+                missionSteps: steps,
+                notes: casualties || "No additional notes",
+                enemyKills: enemyKills,
+                technicalsDestroyed: technicals,
+                hvtsKilled: hvtsKilled,
+                timestamp: new Date()
+            });
+
+            alert("AAR submitted successfully!");
+            document.getElementById("aar-form").reset();
+        } catch (error) {
+            console.error("Error adding AAR:", error);
+            alert("Failed to submit AAR.");
+        }
+    });
 });
