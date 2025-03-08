@@ -4,7 +4,7 @@ const REPO = "DamianNinya/ninya";
 const FILE_PATH = "aar_data.json";
 const BRANCH = "main"; // Change if using another branch
 
-const GITHUB_TOKEN = "your-github-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-here";  // Place your token here
+const GITHUB_TOKEN = "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";  // Place your token here
 
 // Utility function to update the JSON file on GitHub
 async function updateAARData(newData) {
