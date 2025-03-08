@@ -278,20 +278,27 @@
       const tabs = document.querySelectorAll('.tab');
       const tabContents = document.querySelectorAll('.tab-content');
 
-      // Set the first tab as active by default
-      tabs[0].classList.add('active');
-      tabContents[0].classList.add('active');
-      
-      tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-          tabs.forEach(t => t.classList.remove('active'));
-          tabContents.forEach(content => content.classList.remove('active'));
+      // Ensure that elements exist before adding event listeners
+      if (tabs.length > 0 && tabContents.length > 0) {
+        // Set the first tab as active by default
+        tabs[0].classList.add('active');
+        tabContents[0].classList.add('active');
 
-          tab.classList.add('active');
-          const targetContent = document.getElementById(tab.id.replace('Tab', ''));
-          targetContent.classList.add('active');
+        tabs.forEach(tab => {
+          tab.addEventListener('click', () => {
+            // Remove 'active' class from all tabs and content
+            tabs.forEach(t => t.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            // Add 'active' class to clicked tab and its corresponding content
+            tab.classList.add('active');
+            const targetContent = document.getElementById(tab.id.replace('Tab', ''));
+            if (targetContent) {
+              targetContent.classList.add('active');
+            }
+          });
         });
-      });
+      }
     });
   </script>
 </body>
