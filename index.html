@@ -3,9 +3,13 @@
 <head>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      if (window.location.pathname.endsWith(".html")) {
-        const newUrl = window.location.pathname.replace(".html", "");
-        window.history.replaceState({}, document.title, newUrl);
+      try {
+        if (window.location.protocol !== "file:" && window.location.pathname.endsWith(".html")) {
+          const newUrl = window.location.pathname.replace(".html", "");
+          window.history.replaceState({}, document.title, newUrl);
+        }
+      } catch (error) {
+        console.warn("History API is not available in local file mode:", error);
       }
     });
   </script>  
@@ -14,29 +18,26 @@
   <title>Black Viper AAR</title>
   <link rel="stylesheet" href="styles.css" />
   <style>
-    /* Adjust styles for tabs to match your global CSS */
     .tabs {
       display: flex;
-      justify-content: space-around;
-      margin: 20px 0;
+      justify-content: center;
+      gap: 10px;
+      margin: 20px auto;
+      max-width: 900px; /* Matches the table width */
       background-color: #1e1e1e;
       border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      padding: 10px;
     }
     .tab {
       padding: 15px 20px;
       color: #e0e0e0;
       cursor: pointer;
-      text-align: center;
       font-weight: bold;
       background-color: #2c2c2c;
       border-radius: 8px;
       transition: background-color 0.3s ease;
     }
-    .tab:hover {
-      background-color: #64b5f6;
-    }
-    .tab.active {
+    .tab:hover, .tab.active {
       background-color: #64b5f6;
       color: #121212;
     }
@@ -45,32 +46,35 @@
       padding: 20px;
       background-color: #2c2c2c;
       border-radius: 8px;
-      margin-top: 20px;
+      margin: 20px auto;
+      max-width: 900px; /* Matches the table width */
+      text-align: center;
     }
+
     .tab-content.active {
       display: block;
     }
-
-    /* Style for tables */
+    
     table {
-      width: 100%;
+      width: 90%;
+      max-width: 900px;
+      margin: 10px auto;
       border-collapse: collapse;
-      margin-top: 10px;
-      background-color: #2c2c2c;  /* Match the dark background */
-      color: #e0e0e0; /* Bright text color for better readability */
+      background-color: #2c2c2c;
+      color: #e0e0e0;
+      border-radius: 8px;
+      overflow: hidden;
     }
     th, td {
       padding: 10px;
       text-align: center;
-      border: 1px solid #444;  /* Lighter border for better contrast */
+      border: 1px solid #444;
     }
     th {
-      background-color: #333;  /* Slightly lighter than the rows */
+      background-color: #333;
     }
-
-    /* Table hover effect */
     tbody tr:hover {
-      background-color: #444; /* Slightly lighter when hovering over rows */
+      background-color: #444;
     }
   </style>
 </head>
@@ -82,17 +86,15 @@
     <a href="form.html">View AARs</a>
     <a href="Comms.html">Comms</a>
   </nav>
-
-  <!-- Tab navigation -->
+  
   <div class="tabs">
-    <div class="tab" id="pmcTab">PMC Member List</div>
+    <div class="tab active" id="pmcTab">PMC Member List</div>
     <div class="tab" id="dressCodeTab">Dress Code</div>
     <div class="tab" id="weaponsLoadoutTab">Weapons Loadout</div>
     <div class="tab" id="utilityLoadoutTab">Utility Loadout</div>
   </div>
-
-  <!-- Tab content -->
-  <div class="tab-content" id="pmcMemberList">
+  
+  <div class="tab-content active" id="pmcMemberList">
     <h2>PMC Member List</h2>
     <table>
       <thead>
@@ -131,7 +133,7 @@
       </tbody>
     </table>
   </div>
-
+  
   <div class="tab-content" id="dressCode">
     <h2>Dress Code</h2>
     <table>
@@ -279,33 +281,41 @@
       </tbody>
     </table>
   </div>
-
+  
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const tabs = document.querySelectorAll('.tab');
       const tabContents = document.querySelectorAll('.tab-content');
-    
+
       tabs.forEach(tab => {
         tab.addEventListener('click', () => {
-          tabs.forEach(t => t.classList.remove('active')); // Remove active class from all tabs
-          tabContents.forEach(content => content.classList.remove('active')); // Remove active class from all content sections
-          
-          tab.classList.add('active'); // Add active class to the clicked tab
-          const targetContentId = tab.id.replace('Tab', ''); // Find the corresponding content by removing 'Tab' from tab ID
-          const targetContent = document.getElementById(targetContentId);
-          
+          // Remove active class from all tabs & contents
+          tabs.forEach(t => t.classList.remove('active'));
+          tabContents.forEach(content => content.classList.remove('active'));
+
+          // Add active class to clicked tab
+          tab.classList.add('active');
+
+          // Fix: Correctly find and activate tab content
+          const targetContentId = tab.id.replace('Tab', '');  // e.g., "pmcTab" -> "pmc"
+          const targetContent = document.getElementById(targetContentId + "MemberList") || 
+                                document.getElementById(targetContentId);
+
           if (targetContent) {
-            targetContent.classList.add('active'); // Show the content
+            targetContent.classList.add('active');
+          } else {
+            console.error(`Element with ID '${targetContentId}' not found.`);
           }
         });
       });
-    
-      // Ensure the first tab is active on page load
-      if (tabs.length > 0) {
-        tabs[0].classList.add('active');
-        if (tabContents.length > 0) {
-          tabContents[0].classList.add('active');
-        }
+
+      // Ensure the first tab (PMC Member List) is active on page load
+      const defaultTab = document.getElementById("pmcTab");
+      const defaultContent = document.getElementById("pmcMemberList");
+      
+      if (defaultTab && defaultContent) {
+        defaultTab.classList.add("active");
+        defaultContent.classList.add("active");
       }
     });
   </script>
