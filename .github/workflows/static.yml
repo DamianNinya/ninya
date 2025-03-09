@@ -1,7 +1,5 @@
 # Simple workflow for deploying static content to GitHub Pages
 name: Black-Viper PMC
-permalink: pretty
-
 
 on:
   # Runs on pushes targeting the default branch

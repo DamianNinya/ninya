@@ -1,5 +1,5 @@
 # Workflow to deploy static content to GitHub Pages
-name: Deploy static content to Pages
+name: Black-Viper PMC
 
 on:
   push:
