@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      try {
+        if (window.location.protocol !== "file:" && window.location.pathname.endsWith(".html")) {
+          const newUrl = window.location.pathname.replace(".html", "");
+          window.history.replaceState({}, document.title, newUrl);
+        }
+      } catch (error) {
+        console.warn("History API is not available in local file mode:", error);
+      }
+    });
+  </script> 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Military Formations</title>
