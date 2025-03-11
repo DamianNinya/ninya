@@ -87,57 +87,18 @@
     <a href="form.html">View AARs</a>
     <a href="Formations.html">Formations Guide</a>
     <a href="Comms.html">Comms</a>
+    <a href="Members.html">Members</a>
     <a href="Info.html">Info</a>
   </nav>
   
   <div class="tabs">
-    <div class="tab active" id="pmcTab">PMC Member List</div>
-    <div class="tab" id="dressCodeTab">Dress Code</div>
+    <div class="tab active" id="dressCodeTab">Dress Code</div>
     <div class="tab" id="weaponsLoadoutTab">Weapons Loadout</div>
     <div class="tab" id="utilityLoadoutTab">Utility Loadout</div>
   </div>
   
-  <div class="tab-content active" id="pmcMemberList">
-    <h2>PMC Member List</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Callsign</th>
-          <th>Role</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Alex.xx366</td>
-          <td>01 (Actual)</td>
-          <td>Commander / Pointman</td>
-        </tr>
-        <tr>
-          <td>betterpupplex</td>
-          <td>Hawk</td>
-          <td>Private / Pointman</td>
-        </tr>
-        <tr>
-          <td>ninya_real</td>
-          <td>Sicario</td>
-          <td>Private First Class / Medic</td>
-        </tr>
-        <tr>
-          <td>troyboi009_31062</td>
-          <td>Reaper</td>
-          <td>Private First Class / Assault</td>
-        </tr>
-        <tr>
-          <td>rijah2011</td>
-          <td>Rijah</td>
-          <td>Private / Breacher</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
   
-  <div class="tab-content" id="dressCode">
+  <div class="tab-content active" id="dressCode">
     <h2>Dress Code</h2>
     <table>
       <thead>
@@ -301,7 +262,7 @@
 
           // Fix: Correctly find and activate tab content
           const targetContentId = tab.id.replace('Tab', '');  // e.g., "pmcTab" -> "pmc"
-          const targetContent = document.getElementById(targetContentId + "MemberList") || 
+          const targetContent = document.getElementById(targetContentId + "dressCode") || 
                                 document.getElementById(targetContentId);
 
           if (targetContent) {
@@ -313,8 +274,8 @@
       });
 
       // Ensure the first tab (PMC Member List) is active on page load
-      const defaultTab = document.getElementById("pmcTab");
-      const defaultContent = document.getElementById("pmcMemberList");
+      const defaultTab = document.getElementById("dressCodeTab");
+      const defaultContent = document.getElementById("dressCode");
       
       if (defaultTab && defaultContent) {
         defaultTab.classList.add("active");

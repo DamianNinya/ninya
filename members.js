@@ -2,19 +2,14 @@ document.addEventListener("DOMContentLoaded", function() {
     // Hardcoded profiles data for testing (this would be dynamic in a real scenario)
     const profiles = [
       {
-        username: 'username1',
+        username: '01',
         rank: 'Commander',
-        image: 'Members/username1/commander.png'
+        image: 'Members/01/Commander.png'
       },
       {
-        username: 'username2',
-        rank: 'Private',
-        image: 'Members/username2/private.gif'
-      },
-      {
-        username: 'username3',
+        username: 'Ninya',
         rank: 'Private First Class',
-        image: 'Members/username3/private-first-class.png'
+        image: 'Members/Ninya/private first class.gif'
       }
       // Add more profiles as necessary
     ];
