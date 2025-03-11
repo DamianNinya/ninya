@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Black Viper PMC - Welcome</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    #homepage .container {
+      max-width: 1750; /* Adjust width as needed */
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0;
+      margin: 0 auto;
+    }
+
+    #homepage .info-section {
+      flex: 100; 
+      padding: 20px;
+    }
+
+    #homepage .discord-widget {
+      flex: 1;
+      max-width: 350px;
+      text-align: center;
+      background: #2c2c2c;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    @media (max-width: 768px) {
+      #homepage .container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      #homepage .info-section {
+        width: 100%;
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body id="homepage">
+  <header>
+    <h1>Welcome to Black Viper PMC</h1>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="form.html">View AARs</a>
+    <a href="Formations.html">Formations Guide</a>
+    <a href="Comms.html">Comms</a>
+    <a href="Info.html">Info</a>
+  </nav>
+
+  <main>
+    <div class="container">
+      <section class="info-section">
+        <h2>Hey there!</h2>
+        <p>
+          Black Viper PMC is a group of players who enjoy Tactical Assault VR with a structured, tactical approach. 
+          We like to keep things organized while still having fun, running coordinated missions, and working together as a team.
+        </p>
+        <p>
+          Whether you're into serious milsim or just looking for a place to squad up with like-minded players, we welcome you to check us out.
+          Hop in, say hi, and see if it's your kind of thing!
+        </p>
+      </section>
+
+      <!-- Discord Widget -->
+      <aside class="discord-widget">
+        <h2>Join Us on Discord</h2>
+        <iframe src="https://discord.com/widget?id=1348898559436787792&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe> 
+      </aside>
+    </div>
+  </main>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.body.style.display = "block"; // Ensure visibility before fading in
+      setTimeout(() => {
+        document.body.classList.add("loaded"); // Apply fade-in
+      }, 50); // Small delay prevents instant snap
+    });
+  </script>
+  
+</body>
+</html>
