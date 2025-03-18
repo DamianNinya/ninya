@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            if (window.history.state === null) {
+                var currentUrl = window.location.href;
+                var newUrl = window.location.origin;
+                history.replaceState({}, null, newUrl);
+            }
+        });
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guide Forum</title>
@@ -32,14 +41,5 @@
             </div>
         </div>
     </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            if (window.history.state === null) {
-                var currentUrl = window.location.href;
-                var newUrl = window.location.origin;
-                history.replaceState({}, null, newUrl);
-            }
-        });
-    </script>
 </body>
 </html>
