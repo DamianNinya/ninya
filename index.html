@@ -1,290 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      try {
-        if (window.location.protocol !== "file:" && window.location.pathname.endsWith(".html")) {
-          const newUrl = window.location.pathname.replace(".html", "");
-          window.history.replaceState({}, document.title, newUrl);
-        }
-      } catch (error) {
-        console.warn("History API is not available in local file mode:", error);
-      }
-    });
-  </script>  
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Black Hills AAR</title>
-  <link rel="stylesheet" href="styles.css" />
-  <style>
-    .tabs {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin: 20px auto;
-      max-width: 900px; /* Matches the table width */
-      background-color: #1e1e1e;
-      border-radius: 8px;
-      padding: 10px;
-    }
-    .tab {
-      padding: 15px 20px;
-      color: #e0e0e0;
-      cursor: pointer;
-      font-weight: bold;
-      background-color: #2c2c2c;
-      border-radius: 8px;
-      transition: background-color 0.3s ease;
-    }
-    .tab:hover, .tab.active {
-      background-color: #64b5f6;
-      color: #121212;
-    }
-    .tab-content {
-      display: none;
-      padding: 20px;
-      background-color: #2c2c2c;
-      border-radius: 8px;
-      margin: 20px auto;
-      max-width: 900px; /* Matches the table width */
-      text-align: center;
-    }
-
-    .tab-content.active {
-      display: block;
-    }
-    
-    table {
-      width: 90%;
-      max-width: 900px;
-      margin: 10px auto;
-      border-collapse: collapse;
-      background-color: #2c2c2c;
-      color: #e0e0e0;
-      border-radius: 8px;
-      overflow: hidden;
-    }
-    th, td {
-      padding: 10px;
-      text-align: center;
-      border: 1px solid #444;
-      min-width: 75px;
-
-    }
-    th {
-      background-color: #333;
-    }
-    tbody tr:hover {
-      background-color: #444;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide Forum</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
 </head>
 <body>
-  <header>
-    <h1>Welcome to Black Hills Private Military Contractor's</h1>
-  </header>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="form.html">View AARs</a>
-    <a href="Formations.html">Formations Guide</a>
-    <a href="Comms.html">Comms</a>
-    <a href="Members.html">Members</a>
-    <a href="Info.html">Info</a>
-  </nav>
-  
-  <div class="tabs">
-    <div class="tab active" id="dressCodeTab">Dress Code</div>
-    <div class="tab" id="weaponsLoadoutTab">Weapons Loadout</div>
-    <div class="tab" id="utilityLoadoutTab">Utility Loadout</div>
-  </div>
-  
-  
-  <div class="tab-content active" id="dressCode">
-    <h2>Dress Code</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Rank</th>
-          <th>Outfit Style</th>
-          <th>Plate Carrier</th>
-          <th>Outfit Color</th>
-          <th>Accessories Color</th>
-          <th>Face</th>
-          <th>Eyewear</th>
-          <th>Headwear</th>
-          <th>Gloves</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Private to Staff Sergeant</td>
-          <td>Military Long Sleeve & Tucked</td>
-          <td>Plate Carrier 2</td>
-          <td>Multi Camo Black</td>
-          <td>Grey/Black</td>
-          <td>Masked</td>
-          <td>Tinted Goggles</td>
-          <td>Helmet Quad NVG Camo</td>
-          <td>Covered</td>
-        </tr>
-        <tr>
-          <td>Sergeant First Class to Commander</td>
-          <td>Military Tucked/Rolled</td>
-          <td>Plate Carrier 2</td>
-          <td>Multi Camo Black</td>
-          <td>Grey/Black</td>
-          <td>Masked</td>
-          <td>Tinted Goggles</td>
-          <td>Helmet Quad NVG Camo</td>
-          <td>Covered</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+    <div class="container">
+        <h1>Military & Tactical Guides</h1>
 
-  <div class="tab-content" id="weaponsLoadout">
-    <h2>Weapons Loadout</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Role</th>
-          <th>Primary</th>
-          <th>Sight</th>
-          <th>Grip</th>
-          <th>Offset Sight</th>
-          <th>Muzzle</th>
-          <th>Secondary</th>
-          <th>Secondary Sight</th>
-          <th>Secondary Muzzle</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Assault</td>
-          <td>M4A1 Classic</td>
-          <td>1-3x Holosight</td>
-          <td>Optional</td>
-          <td>Optional</td>
-          <td>Muzzle 02</td>
-          <td>G18C</td>
-          <td>Optional</td>
-          <td>Muzzle 02</td>
-        </tr>
-        <tr>
-          <td>Breacher</td>
-          <td>M4A1 Classic</td>
-          <td>1-3x Holosight</td>
-          <td>Optional</td>
-          <td>Optional</td>
-          <td>Muzzle 02</td>
-          <td>G18C</td>
-          <td>Optional</td>
-          <td>Muzzle 02</td>
-        </tr>
-        <tr>
-          <td>Medic</td>
-          <td>M4A1 Classic</td>
-          <td>1-3x Holosight</td>
-          <td>Optional</td>
-          <td>Optional</td>
-          <td>Muzzle 02</td>
-          <td>G18C</td>
-          <td>Optional</td>
-          <td>Muzzle 02</td>
-        </tr>
-        <tr>
-          <td>Pointman</td>
-          <td>M4A1 Classic</td>
-          <td>1-3x Holosight</td>
-          <td>Optional</td>
-          <td>Optional</td>
-          <td>Muzzle 02</td>
-          <td>G18C</td>
-          <td>Optional</td>
-          <td>Muzzle 02</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+        <div class="forum-section">
+            <button class="collapsible active">Equipment Charts</button>
+            <div class="content" style="display: block;">
+                <button class="guide-button" onclick="location.href='guides/Equipment_Guide.html'">Our Equipment</button>
+            </div>
+        </div>
 
-  <div class="tab-content" id="utilityLoadout">
-    <h2>Utility Loadout</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Team</th>
-          <th>Utility 1</th>
-          <th>Utility 2</th>
-          <th>Shoulder Utility</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Assault</td>
-          <td>Flash-Bangs</td>
-          <td>Syringes</td>
-          <td>Shotgun</td>
-        </tr>
-        <tr>
-          <td>Breacher</td>
-          <td>Breach Charges</td>
-          <td>Flash-Bangs</td>
-          <td>Breach Shotgun</td>
-        </tr>
-        <tr>
-          <td>Medic</td>
-          <td>Syringes</td>
-          <td>Syringes</td>
-          <td>None</td>
-        </tr>
-        <tr>
-          <td>Pointman</td>
-          <td>Flash-Bangs</td>
-          <td>Smoke Grenade</td>
-          <td>Snake Camera</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const tabs = document.querySelectorAll('.tab');
-      const tabContents = document.querySelectorAll('.tab-content');
+        <div class="forum-section">
+            <button class="collapsible active">CQB Tactics</button>
+            <div class="content" style="display: block;">
+                <button class="guide-button" onclick="location.href='guides/cqb.html'">Introduction to CQB</button>
+            </div>
+        </div>
 
-      tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-          // Remove active class from all tabs & contents
-          tabs.forEach(t => t.classList.remove('active'));
-          tabContents.forEach(content => content.classList.remove('active'));
-
-          // Add active class to clicked tab
-          tab.classList.add('active');
-
-          // Fix: Correctly find and activate tab content
-          const targetContentId = tab.id.replace('Tab', '');  // e.g., "pmcTab" -> "pmc"
-          const targetContent = document.getElementById(targetContentId + "dressCode") || 
-                                document.getElementById(targetContentId);
-
-          if (targetContent) {
-            targetContent.classList.add('active');
-          } else {
-            console.error(`Element with ID '${targetContentId}' not found.`);
-          }
-        });
-      });
-
-      // Ensure the first tab (PMC Member List) is active on page load
-      const defaultTab = document.getElementById("dressCodeTab");
-      const defaultContent = document.getElementById("dressCode");
-      
-      if (defaultTab && defaultContent) {
-        defaultTab.classList.add("active");
-        defaultContent.classList.add("active");
-      }
-    });
-  </script>
-
+        <div class="forum-section">
+            <button class="collapsible active">NATO Communication</button>
+            <div class="content" style="display: block;">
+                <button class="guide-button" onclick="location.href='guides/nato_comms.html'">Nato Communication</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

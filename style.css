@@ -1,0 +1,84 @@
+body {
+    background-color: #121212;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+}
+
+h1 {
+    color: #ffcc00;
+    margin-bottom: 20px;
+}
+
+/* Forum sections */
+.forum-section {
+    margin-bottom: 10px;
+}
+
+/* Collapsible button */
+.collapsible {
+    background-color: #222;
+    color: #fff;
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.collapsible:hover {
+    background-color: #333;
+}
+
+/* Collapsible content */
+.content {
+    padding: 10px;
+    background-color: #1a1a1a;
+    border-left: 3px solid #ffcc00;
+}
+
+/* Guide buttons */
+.guide-button {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #ffcc00;
+    padding: 10px;
+    width: 100%;
+    text-align: left;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 5px 0;
+}
+
+.guide-button:hover {
+    background-color: #444;
+    border-color: #ffaa00;
+}
+
+/* Table styling */
+.comm-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.comm-table th, .comm-table td {
+    border: 1px solid #ffcc00;
+    padding: 8px;
+    text-align: center;
+}
+
+.comm-table th {
+    background: #444;
+    color: white;
+}
