@@ -251,12 +251,14 @@
       });
     }
   </script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function() {
-          var currentUrl = window.location.href;
-          var newUrl = window.location.origin;
-          history.replaceState(null, null, newUrl);
-      });
-  </script>
+      <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            if (window.history.state === null) {
+                var currentUrl = window.location.href;
+                var newUrl = window.location.origin;
+                history.replaceState({}, null, newUrl);
+            }
+        });
+    </script>
 </body>
 </html>
