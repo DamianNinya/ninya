@@ -262,5 +262,13 @@
       <a href="../index.html" class="back-button">Back to Forum</a>
     </div>
   </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var currentUrl = window.location.href;
+        var newUrl = window.location.origin;
+        history.replaceState(null, null, newUrl);
+    });
+</script>
 </body>
 </html>
