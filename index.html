@@ -32,5 +32,16 @@
             </div>
         </div>
     </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+       var customTitle = "Home"; 
+       var currentUrl = window.location.href;
+      
+       if (currentUrl.includes(".html")) {
+        var newUrl = currentUrl.replace(".html", "/" + customTitle);
+        history.pushState(null, null, newUrl);
+       }
+    });
+</script>
 </body>
 </html>
