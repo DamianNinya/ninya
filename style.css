@@ -1,0 +1,173 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0a0a0f;
+    background-image: url('mtppattern.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #f0f0f0;
+    image-rendering: pixelated; /* Ensures pixelated look */
+    -ms-interpolation-mode: nearest-neighbor; /* For older versions of Internet Explorer */
+}
+  
+/* Navbar Styling */
+nav {
+    background-color: rgba(0, 0, 0, 0.75); /* Dark background */
+    border-bottom: 2px solid #1c1c3c; /* Border to match the header */
+}
+  
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+nav ul li {
+    margin: 0 1rem;
+}
+  
+nav ul li a {
+    color: #d4af37; /* SAS yellow color */
+    text-decoration: none;
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+    display: block;
+    border-radius: 5px;
+}
+  
+nav ul li a:hover {
+    background-color: #1c1c3c; /* Darken on hover */
+}
+  
+/* Responsive Design for Navbar */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+    }
+    
+    nav ul li {
+        margin: 0.5rem 0;
+    }
+}
+
+header {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.75);
+    padding: 2rem 1rem;
+    border-bottom: 2px solid #1c1c3c;
+}
+  
+header h1 {
+    color: #d4af37;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+  
+header p {
+    color: #aaa;
+    font-size: 1.1rem;
+}
+  
+/* Discord Widget Styling */
+.discord-widget {
+    display: inline-flex; /* Change from flex to inline-flex */
+    justify-content: center;
+    margin-top: 2rem;
+    background-color: rgba(0, 0, 0, 0.75); /* Dark background to match the site theme */
+    background-position: center; /* Center the background */
+    background-repeat: no-repeat; /* Prevent repeating the background */
+    background-size: contain; /* Ensure the background scales to the size of the iframe */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    padding: 0; /* Remove padding to stop background stretching */
+}
+
+.discord-widget {
+    display: block;              /* make it a block so margin: 0 auto works */
+    width: fit-content;          /* shrink-wrap to its contents (the iframe + padding) */
+    margin: 2rem auto;           /* top/bottom 2rem, left/right auto → centers it */
+    background-color: rgba(0, 0, 0, 0.75);
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+  
+.discord-widget iframe {
+    width: 350px;
+    height: 500px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+}
+  
+/* Equipment-specific */
+h1 {
+    text-align: center;
+    color: #d4af37;
+    margin: 2rem 0;
+}
+  
+.forum-section {
+    max-width: 1000px;
+    margin: 0 auto 2rem auto;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 1rem;
+    border-radius: 8px;
+}
+  
+table.comm-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+  
+.comm-table th, .comm-table td {
+    border: 1px solid #2a2a2a;
+    padding: 0.75rem;
+    text-align: center;
+}
+  
+.comm-table th {
+    background-color: #11182c;
+    color: #d4af37;
+}
+  
+.comm-table td {
+    background-color: #0d0d18;
+    color: #e0e0e0;
+}
+
+/* Adjust the first table (Equipment Regulations) to behave like the others */
+.forum-section:first-of-type .comm-table {
+    table-layout: fixed;  /* Force equal distribution of width */
+    width: 100%;          /* Ensure it spans its container */
+}
+
+/* Allow wrapping inside cells so they don't overflow */
+.forum-section:first-of-type .comm-table th,
+.forum-section:first-of-type .comm-table td {
+    white-space: normal;        /* Allow multiple lines */
+    word-wrap: break-word;      /* Break long words if needed */
+    overflow: hidden;           /* Hide any overflow cleanly */
+    text-overflow: clip;        /* Don't show ellipsis, just clip */
+}
+
+/* Optional: reduce padding slightly for very narrow screens */
+@media (max-width: 480px) {
+    .forum-section:first-of-type .comm-table th,
+    .forum-section:first-of-type .comm-table td {
+        padding: 0.4rem;
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .comm-table th, .comm-table td {
+        font-size: 0.75rem;
+        padding: 0.5rem;
+    }
+}
